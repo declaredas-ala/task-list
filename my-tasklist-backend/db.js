@@ -1,9 +1,9 @@
 
 const { Sequelize } = require('sequelize');
 
-const sequelize = new Sequelize('mytasklistdb', 'root', 'root', {
-  host: '127.0.0.1',
-  dialect: 'mysql',
+const sequelize = new Sequelize(name, username, password, {
+  host,
+  dialect : 'mysql',
 });
 
 module.exports = sequelize;
