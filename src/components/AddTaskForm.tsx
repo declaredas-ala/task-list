@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { addTask } from '../features/tasksSlice';
-import { TextField, Button, Grid } from '@material-ui/core';
+import { TextField, Button, Grid } from '@mui/material';
+
 import axios from 'axios';
 
 const AddTaskForm: React.FC = () => {

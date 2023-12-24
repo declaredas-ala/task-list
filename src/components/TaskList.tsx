@@ -8,26 +8,35 @@ import {
   ListItem,
   ListItemText,
   TextField,
-} from '@material-ui/core';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
+} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
-
 
 const TaskList: React.FC = () => {
   const dispatch = useDispatch();
   const tasks = useSelector((state: RootState) => state.tasks.tasks);
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/tasks').then((response) => {
-      dispatch(setTasks(response.data));
-    });
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/api/tasks');
+        dispatch(setTasks(response.data));
+      } catch (error) {
+        console.error('Fetch Error:', error);
+      }
+    };
+
+    fetchData();
   }, [dispatch]);
 
-  const handleDelete = (taskId: number) => {
-    axios.delete(`http://localhost:5000/api/tasks/${taskId}`).then(() => {
+  const handleDelete = async (taskId: number) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/tasks/${taskId}`);
       dispatch(deleteTask(taskId));
-    });
+    } catch (error) {
+      console.error('Delete Error:', error);
+    }
   };
 
   const handleUpdate = async (id: number, value: string) => {
@@ -64,10 +73,10 @@ const TaskList: React.FC = () => {
               </Button>
               <Button
                 variant="contained"
-                color="default"
+                color="primary"
                 onClick={() => {
                   setEditingTaskId(null);
-                  setEditedTaskTitle(''); 
+                  setEditedTaskTitle('');
                 }}
               >
                 Cancel
@@ -90,7 +99,7 @@ const TaskList: React.FC = () => {
                 startIcon={<EditIcon />}
                 onClick={() => {
                   setEditingTaskId(task.id);
-                  setEditedTaskTitle(task.title); 
+                  setEditedTaskTitle(task.title);
                 }}
               >
                 Edit
@@ -104,4 +113,3 @@ const TaskList: React.FC = () => {
 };
 
 export default TaskList;
-

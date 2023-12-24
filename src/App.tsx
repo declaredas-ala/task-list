@@ -6,45 +6,43 @@ import {
   CssBaseline,
   Grid,
   Paper,
-  makeStyles,
-} from '@material-ui/core';
+} from '@mui/material';
+import { styled, Theme } from '@mui/system';
+
 import TaskList from './components/TaskList';
 import AddTaskForm from './components/AddTaskForm';
 
-import backgroundImage from './ala.jpg'; // Import the image file
+import backgroundImage from './ala.jpg';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    minHeight: '100vh',
-    backgroundImage: `url(${backgroundImage})`,
-    backgroundSize: 'cover',
-    backgroundAttachment: 'fixed', // Keep the background image fixed
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  container: {
-    backgroundColor: 'rgba(255, 255, 255, 0.8)',
-    padding: theme.spacing(4),
-    borderRadius: theme.spacing(1),
-  },
+const RootContainer = styled('div')({
+  minHeight: '100vh',
+  backgroundImage: `url(${backgroundImage})`,
+  backgroundSize: 'cover',
+  backgroundAttachment: 'fixed',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center',
+});
+
+const MainContainer = styled(Container)(({ theme }: { theme: Theme }) => ({
+  backgroundColor: 'rgba(255, 255, 255, 0.8)',
+  padding: theme.spacing(4),
+  borderRadius: theme.spacing(1),
 }));
 
 const App: React.FC = () => {
-  const classes = useStyles();
-
   return (
-    <div className={classes.root}>
+    <RootContainer>
       <CssBaseline />
-      <Container component="main" maxWidth="md" className={classes.container}>
+      <MainContainer maxWidth="md">
         <Typography variant="h4" gutterBottom>
           Task List
         </Typography>
         <AddTaskForm />
-        <Grid container spacing={3} justify="center">
+        <Grid container spacing={3} justifyContent="center">
           <Grid item xs={12} md={8}>
-            <Paper elevation={3} className={classes.container}>
+            <Paper elevation={3} sx={{ p: 4, borderRadius: 1 }}>
               <Typography variant="h5" gutterBottom>
                 Your Tasks
               </Typography>
@@ -52,8 +50,8 @@ const App: React.FC = () => {
             </Paper>
           </Grid>
         </Grid>
-      </Container>
-    </div>
+      </MainContainer>
+    </RootContainer>
   );
 };
 
