@@ -1,4 +1,4 @@
-// src/App.tsx
+
 import React from 'react';
 import {
   Container,
@@ -12,7 +12,7 @@ import { styled, Theme } from '@mui/system';
 import TaskList from './components/TaskList';
 import AddTaskForm from './components/AddTaskForm';
 
-import backgroundImage from './ala.jpg';
+import backgroundImage from './image.jpg';
 
 const RootContainer = styled('div')({
   minHeight: '100vh',

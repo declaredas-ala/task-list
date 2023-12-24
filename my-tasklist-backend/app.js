@@ -1,4 +1,4 @@
-// app.js
+
 const express = require('express');
 const cors = require('cors');
 const { Task } = require('./models');
@@ -26,8 +26,8 @@ app.delete('/api/tasks/:id', async (req, res) => {
   await Task.destroy({ where: { id: taskId } });
   res.json({ id: parseInt(taskId) });
 });
-// app.js
-// ... (your existing code)
+
+
 
 app.put(
   '/api/tasks/:id',

@@ -1,4 +1,4 @@
-// my-tasklist-backend/db.js
+
 const { Sequelize } = require('sequelize');
 
 const sequelize = new Sequelize('mytasklistdb', 'root', 'root', {
